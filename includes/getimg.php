@@ -1,15 +1,17 @@
-<?php 
+<?php
 
-$dir = 'D:/wamp/www/Dropbox/Project323/';
+include "Dotenv.php";
+Dotenv::load(dirname(__DIR__));
+
 
 if(isset($_GET['src'])) {
-	
+
 	$src = $_GET['src'];
-	
-	$im = file_get_contents($dir.'/'.$src); 
-	header('content-type: image/png'); 
-	echo $im; 
-	
+
+	$im = file_get_contents($_ENV['DDOTS_DIR'].'/'.$src);
+	header('content-type: image/png');
+	echo $im;
+
 }
 
 ?>

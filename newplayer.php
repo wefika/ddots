@@ -1,21 +1,21 @@
 <?php
 	session_start();
 
+	include('includes/mysql_connect.php');
 	function endsWith($haystack, $needle)
 	{
 	    $length = strlen($needle);
 	    if ($length == 0) {
 	        return true;
 	    }
-	
+
 	    return (substr($haystack, -$length) === $needle);
 	}
-	
+
 	$project = $_GET['play'];
-	$dir = 'D:/wamp/www/Dropbox/Project323/'.$project;
-	$filename = $dir."/".".ddots";
-	
-	
+	$dir = $_ENV['DDOTS_DIR']."/".$project;
+	$filename = $dir."/"."config.ddots";
+
 	$file = file_get_contents($filename, true);
 	if(isset($_SESSION['login']) && $_SESSION['login'] != true) {
 		if($file != 'public=1') {
@@ -23,12 +23,12 @@
 		}
 	}
 
-	
-	
+
+
 ?>
 
 <style type="text/css">
-	
+
 	body {
 	    margin: 0;
 	    padding: 0;
@@ -43,11 +43,11 @@
 		display:table-cell;
 	    text-align: center;
 	    vertical-align: middle;
-	} 
+	}
 	#mainfancybox img {
 		height: 100%;
 	}
-	
+
 	.hidden {
 		/*  */
 		display: none;
@@ -56,8 +56,8 @@
 		position: absolute;
 		background-color: transparent;
 		opacity: 0.5;
-	}	
-	
+	}
+
 </style>
 
 <div id="mainfancybox" style="">
@@ -74,31 +74,31 @@
 		    }
 		    closedir($handle);
 		}
-	
+
 	?>
 </div>
-	
 
-	
-	
+
+
+
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        
+
 <script type="text/javascript">
-	
+
 	var povezave = new Array();
-		
+
 	$(document).ready(function() {
 		var imageTotal = $('img').length;
-	    var imageCount = 0;        
+	    var imageCount = 0;
 	    $('img').load(function(){
 	    	if(++imageCount == imageTotal) doStuff();
 	    });
 	});
 	function doStuff() {
 		conData = [ <?php
-			$lines = explode("\n", str_replace("\r", "", trim(file_get_contents('D:/wamp/www/Dropbox/Project323/'.$project.'/links.config'))));
+			$lines = explode("\n", str_replace("\r", "", trim(file_get_contents($_ENV['DDOTS_DIR'].'/'.$project.'/links.config'))));
 			echo "\"".implode("\", \"", $lines)."\""; ?>];
-		
+
 		var n=0;
 		for(i in conData) {
 			tmparray = conData[i].split(';');
@@ -111,40 +111,40 @@
 			povezave[n]['pos2Y'] = parseFloat(tmparray[5]);
 			n++;
 		}
-		
+
 		setTimeout(function () {
 	        // Hide the address bar!
 	        window.scrollTo(0, 1);
 	    }, 1000);
-		    
+
 		$(".hidden img").first().each(function(index) {
 			$("#mainfancybox").append($(this));
 			loadImg($(this));
 		});
-		
+
 	}
-	
+
 	function loadImg() {
 		mydiv = 0;
 		for(i in povezave) {
 			//console.log(povezave[i]['file1'] +"  ==   "+ $("#mainfancybox img").first().attr('filename'));
 			if(povezave[i]['file1'] == $("#mainfancybox img").first().attr('filename')) {
-				
+
 				$("#mainfancybox").append("<div id='mydiv"+mydiv+"' class='graydiv'></div>");
-		
+
 				hm = $("#mainfancybox img").position().left;
 				vm = parseFloat($("#mainfancybox img").offset().top);
-		
+
 				//console.log(hm + ", " + vm);
-		
+
 				//console.log("image size: " + $("#mainfancybox img").height());
 				//console.log("image size: " + $("#mainfancybox img").width());
-				
+
 				k = parseFloat($("#mainfancybox img").height()) / 500;
-			
+
 				//console.log("k: " + k);
 				//console.log("pos1y: " + povezave[i]['pos1Y']*k);
-			
+
 				$("#mydiv"+mydiv).css({
 					left: (hm + parseFloat(povezave[i]['pos1X'])*k)+'px',
 					top: (vm + povezave[i]['pos1Y']*k)+'px',
@@ -159,7 +159,7 @@
 			}
 		}
 	}
-	
+
 	function LinkClicked(conID) {
 		$(".hidden").append($("#mainfancybox img"));
 		$("#mainfancybox .graydiv").remove();
@@ -171,5 +171,5 @@
 			}
 		});
 	}
-	
+
 </script>

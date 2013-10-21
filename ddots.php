@@ -1,12 +1,12 @@
 <?php
 
-	$rootdir = "D:/wamp/www/Dropbox/Project323/";
-
 	session_start();
 	include('includes/mysql_connect.php');
 	if(!isset($_SESSION['login']) || $_SESSION['login'] == false) {
 		header('location: login.php');
 	}
+
+  $rootdir = $_ENV['DDOTS_DIR']."/";
 
 	$admin = false;
 	if(isset($_GET['admin'])) {
@@ -24,7 +24,8 @@
 			$public = '1';
 		}
 
-		$filename = $rootdir.$dir."/".".ddots";
+
+		$filename = $rootdir.$dir."/"."config.ddots";
 		file_put_contents($filename, "public=".$public, LOCK_EX);
 
 	}
@@ -106,11 +107,12 @@
       	</tr>
 
       	<?php
-      $dirs = array_filter(glob($_ENV['DDOTS_DIR']), 'is_dir');
+
+      $dirs = array_filter(glob($_ENV['DDOTS_DIR']."/*"), 'is_dir');
 			$i = 1;
 			foreach($dirs as $dir) {
 
-				$filename = $dir."/".".ddots";
+				$filename = $dir."/"."config.ddots";
 				$public = false;
 
 				if(!file_exists($filename)) {

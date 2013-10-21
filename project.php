@@ -5,18 +5,18 @@
 	if(!isset($_SESSION['login']) || $_SESSION['login'] == false) {
 		header('location: login.php');
 	}
-	
+
 	$admin = false;
 	if(isset($_GET['admin'])) {
 		if($_GET['admin'] == 'pass') {
 			$admin = true;
 		}
 	}
-	
-	$userid = $_SESSION['loginid'];	
-	
-	
-	$dirname = $_GET['dir']; 
+
+	$userid = $_SESSION['loginid'];
+
+
+	$dirname = $_GET['dir'];
 	function endsWith($haystack, $needle) {
 	    $length = strlen($needle);
 	    if ($length == 0) {
@@ -44,34 +44,34 @@
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
-      
-	
+
+
 	.uploadedimg:hover {
 		border: 1px solid #ddd;
 		padding: 9px;
 		cursor: pointer;
 	}
-	
+
 	.uploadedimg {
-		
+
 		float: left;
 		padding: 10px;
 		margin: 10px 0 0 10px;
 	}
-	
+
 	.uploadedimg img {
 	    height: 200px;
-	    
+
 	  }
-	
+
 	.uploadedimg div {
 	    text-align: center;
 	    color: #888;
 	  }
-	
+
 	.editorimg {
 	    /*  */
-	    
+
 	    border:1px solid black;
 	  }
 
@@ -97,8 +97,8 @@
           <a class="brand" href="#">FirstBunch v1.0</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><a href="index.php">My Bunches</a></li>
-              <li><a href="createbunch.php">Create new Bunch</a></li>
+              <!--li><a href="index.php">My Bunches</a></li>
+              <li><a href="createbunch.php">Create new Bunch</a></li-->
               <li class="active"><a href="ddots.php">ddots v1.0</a></li>
             </ul>
           </div><!--/.nav-collapse -->
@@ -116,16 +116,16 @@
     </div>
 
     <div class="container">
-    	
+
 	<ul class="breadcrumb">
 	  <li><a href="ddots.php">ddots v1.0</a> <span class="divider">/</span></li>
 	  <li class="active">Editing project</li>
 	</ul>
-	
+
       <div class="main wrapper clearfix">
             <h3>Project: <?=$dirname ?></h3>
         	<?php
-				$dir = 'D:/wamp/www/Dropbox/Project323/'.$dirname;
+				$dir = $_ENV['DDOTS_DIR']."/".$dirname;
 				if ($handle = opendir($dir)) {
 				    $blacklist = array('.', '..', '.dropbox', 'desktop.ini', 'links.config');
 				    while (false !== ($file = readdir($handle))) {
@@ -140,10 +140,10 @@
 				    }
 				    closedir($handle);
 				}
-			
+
 			?>
         </div> <!-- #main -->
-        
+
     </div> <!-- /container -->
 
     <!-- Le javascript
@@ -152,20 +152,20 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-    
+
 		<script type="text/javascript" src="js/fancybox/jquery.fancybox.js?v=2.1.4"></script>
-    
+
     <script type="text/javascript">
-		
+
 		dirname = "<?=$dirname ?>";
 		selectedFilename = "keks";
-		
+
     	$(".fancybox").fancybox();
     	$(".fancybox").click(function() {
-    		
+
     		selectedFilename = $(this).children().first().attr("filename");
       	});
-    
+
         var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
         (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
         g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';

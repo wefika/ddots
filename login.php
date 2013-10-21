@@ -101,7 +101,7 @@
 
     <div class="container">
       <h2>Bunch<br/><small>FirstBunch v1.0 + ddots v1.0</small></h2>
-      <form class="form-signin" action="login.php" method="POST">
+      <form class="form-signin" action="login.php" method="POST" id="login-form">
         <h4 class="form-signin-heading">Please sign in</h4>
         <span><?=($error ? "<label class='label label-important'>Incorrect login!</label>" : "")?></span>
         <input type="text" class="input-block-level" placeholder="Email address" name="email" id="email">
@@ -109,8 +109,8 @@
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> Remember me
         </label>
-        <input class="btn btn-primary" type="submit" value="Sign in" name="loginsubmit" />
-        <input class="btn pull-right btn-inverse demo-acc" type="button" value="Demo account" />
+        <input class="btn btn-primary" type="submit" value="Sign in" name="loginsubmit" id="login-btn" />
+        <input class="btn pull-right btn-danger demo-acc" type="submit" value="Login with demo account" />
       </form>
 
     </div> <!-- /container -->
@@ -124,6 +124,7 @@
       $(".demo-acc").click(function() {
         $("#email").val("admin@example.com");
         $("#pass").val("admin");
+        $("#login-btn").click();
       });
     });
   </script>
