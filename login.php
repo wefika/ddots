@@ -19,7 +19,7 @@
 			$_SESSION['loginid'] = $row['id'];
 			$_SESSION['email'] = $row['email'];
 			$_SESSION['name'] = $row['name'];
-			header('location: index.php');
+			header('location: ddots.php');
 		} else {
 			$error = true;
 		}

@@ -7,29 +7,29 @@
 	if(!isset($_SESSION['login']) || $_SESSION['login'] == false) {
 		header('location: login.php');
 	}
-	
+
 	$admin = false;
 	if(isset($_GET['admin'])) {
 		if($_GET['admin'] == 'pass') {
 			$admin = true;
 		}
 	}
-	
+
 	if(isset($_GET['dir']) && isset($_GET['public'])) {
-		
+
 		$dir = $_GET['dir'];
-		
+
 		$public = '0';
 		if($_GET['public'] == 1) {
 			$public = '1';
 		}
-		
+
 		$filename = $rootdir.$dir."/".".ddots";
 		file_put_contents($filename, "public=".$public, LOCK_EX);
-		
+
 	}
-	
-	$userid = $_SESSION['loginid'];	
+
+	$userid = $_SESSION['loginid'];
 
 ?>
 <!DOCTYPE html>
@@ -70,8 +70,8 @@
           <a class="brand" href="#">FirstBunch v1.0</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><a href="index.php">My Bunches</a></li>
-              <li><a href="createbunch.php">Create new Bunch</a></li>
+              <!--<li><a href="index.php">My Bunches</a></li>
+              <li><a href="createbunch.php">Create new Bunch</a></li>-->
               <li class="active"><a href="ddots.php">ddots v1.0</a></li>
             </ul>
           </div><!--/.nav-collapse -->
@@ -93,7 +93,7 @@
 	<ul class="breadcrumb">
 	  <li class="active">ddots v1.0</li>
 	</ul>
-	
+
       <h3>ddots projects <small>discover files from Dropbox</small></h3>
       <table class="table table-hover">
       	<tr>
@@ -104,15 +104,15 @@
       		<th style="width: 70px">Link</th>
       		<th style="width: 70px">Preview</th>
       	</tr>
-      	
+
       	<?php
-			$dirs = array_filter(glob('D:/wamp/www/Dropbox/Project323/*'), 'is_dir');
+      $dirs = array_filter(glob($_ENV['DDOTS_DIR']), 'is_dir');
 			$i = 1;
 			foreach($dirs as $dir) {
-				
+
 				$filename = $dir."/".".ddots";
 				$public = false;
-				
+
 				if(!file_exists($filename)) {
 					//$file = fopen($filename, 'w') or die("can't open file");
 					//fclose($file);
@@ -123,8 +123,8 @@
 						$public = true;
 					}
 				}
-				
-				
+
+
 				$dirname = end(explode('/', $dir)); ?>
 				<tr>
 					<td><?=$i++?></td>
