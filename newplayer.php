@@ -1,4 +1,5 @@
 <?php
+
 	session_start();
 
 	include('includes/mysql_connect.php');
@@ -89,6 +90,7 @@
 
 	$(document).ready(function() {
 		var imageTotal = $('img').length;
+		console.log("Loading " + imageTotal + " images.")
 	    var imageCount = 0;
 	    $('img').load(function(){
 	    	if(++imageCount == imageTotal) doStuff();

@@ -91,6 +91,19 @@
 
     <div class="container">
 
+      <?php
+
+      if($_GET['debug']) {
+        echo "<div class='alert'>";
+        if(file_exists($rootdir)) {
+          echo "PHP can see file $rootdir";
+        } else {
+          echo "Error, PHP cant see file $rootdir";
+        }
+        echo "</div>";
+      }
+      ?>
+
 	<ul class="breadcrumb">
 	  <li class="active">ddots v1.0</li>
 	</ul>
