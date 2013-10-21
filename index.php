@@ -1,5 +1,7 @@
 <?php
 
+  header("location: ddots.php");
+
 	session_start();
 	include('includes/mysql_connect.php');
 	if(!isset($_SESSION['login']) || $_SESSION['login'] == false) {

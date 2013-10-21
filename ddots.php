@@ -97,6 +97,7 @@
         echo "<div class='alert'>";
         if(file_exists($rootdir)) {
           echo "PHP can see file $rootdir";
+          echo fileperms($rootdir);
         } else {
           echo "Error, PHP cant see file $rootdir";
         }
@@ -166,7 +167,7 @@
 						<?php } ?>
 					</td>
 					<td>
-						<a href="newplayer.php?play=<?=$dirname?>" class="btn btn-inverse btn-small"><i class="icon-play icon-white"></i></a>
+						<a href="newplayer.php?play=<?=$dirname?>" class="btn btn-success btn-small"><i class="icon-play icon-white"></i></a>
 					</td>
 				</tr>
 		<?php } ?>
