@@ -19,7 +19,7 @@
 			$_SESSION['loginid'] = $row['id'];
 			$_SESSION['email'] = $row['email'];
 			$_SESSION['name'] = $row['name'];
-			header('location: index.php');
+			header('location: ddots.php');
 		} else {
 			$error = true;
 		}
@@ -104,12 +104,13 @@
       <form class="form-signin" action="login.php" method="POST">
         <h4 class="form-signin-heading">Please sign in</h4>
         <span><?=($error ? "<label class='label label-important'>Incorrect login!</label>" : "")?></span>
-        <input type="text" class="input-block-level" placeholder="Email address" name="email">
-        <input type="password" class="input-block-level" placeholder="Password" name="pass">
+        <input type="text" class="input-block-level" placeholder="Email address" name="email" id="email">
+        <input type="password" class="input-block-level" placeholder="Password" name="pass" id="pass">
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> Remember me
         </label>
         <input class="btn btn-primary" type="submit" value="Sign in" name="loginsubmit" />
+        <input class="btn pull-right btn-inverse demo-acc" type="button" value="Demo account" />
       </form>
 
     </div> <!-- /container -->
@@ -118,5 +119,14 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(".demo-acc").click(function() {
+        $("#email").val("admin@example.com");
+        $("#pass").val("admin");
+      });
+    });
+  </script>
 
-</body></html>
+</body>
+</html>

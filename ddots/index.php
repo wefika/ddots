@@ -50,7 +50,7 @@
               <h1>Projects</h1>
               <ul>
     					<?php
-    						$dirs = array_filter(glob($_ENV['DDOTS_DIR']), 'is_dir');
+    						$dirs = array_filter(glob($_ENV['DDOTS_DIR']), GLOB_ERR);
     						foreach($dirs as $dir) {
     							//var_dump($dir);
     							$dirname = end(explode('/', $dir));
