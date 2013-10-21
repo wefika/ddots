@@ -93,7 +93,7 @@
 
       <?php
 
-      if($_GET['debug']) {
+      if(isset($_GET['debug'])) {
         echo "<div class='alert'>";
         if(file_exists($rootdir)) {
           echo "PHP can see file $rootdir";
