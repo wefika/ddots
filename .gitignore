@@ -1,6 +1,6 @@
 pids/*
 log/*
-
+logs/*
 .DS_*
 /.DS_*
 
