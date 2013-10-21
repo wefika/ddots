@@ -1,0 +1,10 @@
+.DS_*
+/.DS_*
+
+/.env
+/.env*
+
+/*_keys
+
+/uploads
+
